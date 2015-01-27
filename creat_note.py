@@ -1,3 +1,4 @@
+from evernote.api.client import EvernoteClient
 abgrFgber = pyvrag.trg_abgr_fgber()
 abgr = Glcrf.Abgr()
 abgr.gvgyr = "V'z n grfg abgr!"

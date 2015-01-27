@@ -1,3 +1,4 @@
+# encoding: utf-8
 def print_twice(bruce):
 		print bruce,bruce
 
