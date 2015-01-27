@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 from evernote.api.client import EvernoteClient
 import thrift.protocol.TBinaryProtocol as TBinaryProtocol
 import thrift.transport.THttpClient as THttpClient
@@ -16,19 +18,29 @@ print user.username
 
 # UserStore
 #client = EvernoteClient(token=auth_token)
-#userStore = client.get_user_store()
-#user = userStore.getUser()
+client = EvernoteClient(token=dev_token)
+userStore = client.get_user_store()
+user = userStore.getUser()
 
-# CreateNotebook
+# 获取所有的笔记本的名称
 noteStore = client.get_note_store()
-notebook = Types.Notebook()
-notebook.name = "kindle_books"
-notebook = noteStore.createNotebook(notebook)
-print notebook.guid
+notebooks = noteStore.listNotebooks()
+for n in notebooks:
+		print n.name
 
+# 新建笔记本
+# CreateNotebook
+#noteStore = client.get_note_store()
+#notebook = Types.Notebook()
+#notebook.name = "kindle_books"
+#notebook = noteStore.createNotebook(notebook)
+#print notebook.guid
+
+# 新建笔记
 noteStore = client.get_note_store()
 note = Types.Note()
 note.title = "I'm a test note!"
+note.notebookGuild="kindle_books"
 note.content = '<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml2.dtd">'
 note.content += '<en-note>Hello, world!</en-note>'
 note = noteStore.createNote(note)
